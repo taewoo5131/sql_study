@@ -39,8 +39,13 @@ RIGHT JOIN GIRL_GROUP gg
 on gg.hit_song_id  = s.id;
 
 -- CROSS JOIN
+-- 모든 경우의 수를 다 출력 하는 거임 ( a x b )
+select gg.name , s.title
+from GIRL_GROUP gg, SONG s;
 
 -- SELF JOIN
-
+SELECT E.EMPNAME, M.EMPNAME
+FROM EMPLOYEE E, EMPLOYEE M
+WHERE E.MANAGER = M.EMPNO;
 
 
