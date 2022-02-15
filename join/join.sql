@@ -27,9 +27,19 @@ SELECT  gg.debut , gg.name , s.title FROM girl_group gg
 JOIN SONG s
 on gg.hit_song_id  = s.id;
 
+-- 3개의 테이블 join
+select c.customer_id , c.customer_name ,co.car_id ,cc.car_name ,cc.car_maker
+from CUSTOMER c
+JOIN CAR_ORDER co
+on c.customer_id = co.customer_id
+JOIN CAR cc
+on co.car_id = cc.car_id ;
+
+
 -- LEFT OUTER , RIGHT OUTER JOIN
 -- 왼쪽에 있는 차집합 + 교집합 : LEFT OUTER
 -- 오른쪽에 있는 차집합 + 교집합 : RIGHT OUTER
+-- OUTER 조인은 흔히 비교할때 '신부'와 '신랑'의 '결혼식' 을 자주 비유에 들곤 한다.
 SELECT gg.debut , gg.name  , s.title from GIRL_GROUP gg
 LEFT JOIN SONG s
 on gg.hit_song_id  = s.id;
@@ -49,3 +59,22 @@ FROM EMPLOYEE E, EMPLOYEE M
 WHERE E.MANAGER = M.EMPNO;
 
 
+----------------
+
+-- join 에서 update , delete
+-- update
+update CUSTOMER c join CAR_ORDER co
+on c.customer_id = co.customer_id
+set co.order_price = 5000
+where c.customer_name = 'leetaewoo' and co.car_id = 5;
+
+-- delete
+DELETE co from CAR_ORDER co
+join CUSTOMER c
+on c.customer_id = co.customer_id
+where c.customer_name = '박정우' and co.car_id = 1;
+
+DELETE c FROM CUSTOMER c
+LEFT OUTER JOIN CAR_ORDER co
+on co.customer_id is null
+where c.customer_name = '이미나';
